@@ -1,0 +1,60 @@
+class BinaryTree(object):
+    
+    def __init__(self,val):
+        self.key=val
+        self.left=None
+        self.right=None
+    def insertleft(self,val):
+        if self.left==None:
+            self.left=BinaryTree(val)
+        else:
+            r=BinaryTree(val)
+            r.left=self.left
+            self.left=r.left
+            
+    def insertright(self,val):
+        if self.right==None:
+            self.right=BinaryTree(val)
+        else:
+            e=BinaryTree(val)
+            e.right=self.right
+            self.right=e.right
+            
+    def getrootval(self):
+        return self.key
+    def getleft(self):
+        return self.left
+    
+    def getright(self):
+        return self.right
+f=BinaryTree(8)
+f.insertleft(9)
+f.insertright(10)
+f.getleft().insertleft(2)
+print(f.getleft().getleft().getrootval())
+print("preorder traversal")
+def preorder(obj):
+    if obj:
+        
+        print(obj.getrootval())
+        preorder(obj.getleft())
+        preorder(obj.getright())
+preorder(f)
+print("inorder traversal")
+def inorder(obj):
+    if obj:
+        
+        
+        inorder(obj.getleft())
+        print(obj.getrootval())
+        inorder(obj.getright())
+inorder(f)
+print("postorder traversal")
+def postorder(obj):
+    if obj:
+        
+        
+        postorder(obj.getleft())
+        postorder(obj.getright())
+        print(obj.getrootval())
+postorder(f)

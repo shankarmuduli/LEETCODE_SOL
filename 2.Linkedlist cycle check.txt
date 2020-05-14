@@ -1,0 +1,19 @@
+#step1:take two pointers
+
+ #step2:if the fast pointer and slow pointers are equal then there is a cycle
+
+
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head:
+            return False    
+        
+        fast=head.next          
+        slow=head
+        while(fast!=None and slow!=None and fast.next!=None):
+            if fast==slow:         
+                return True
+            fast=fast.next.next
+            slow=slow.next
+        return False

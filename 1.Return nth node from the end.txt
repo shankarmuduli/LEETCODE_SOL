@@ -1,0 +1,20 @@
+def getNthfromEnd(head,n):
+    #code here
+    # times=input()
+    # length,n=input().split()
+    front=head              # step1:initialize two pointer
+    item=head
+    lens=0
+    k=head
+    while(k!=None):
+        k=k.next
+        lens+=1 
+    if lens<n:              #step2:if len<n then return -1        
+        return -1
+    while(n):
+        front=front.next    #step3:move the pointer n times
+        n-=1
+    while(front!=None):     #step4:move both pointers till the end of the list
+        front=front.next
+        item=item.next
+    return item.data

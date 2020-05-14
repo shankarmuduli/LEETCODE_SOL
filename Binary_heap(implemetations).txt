@@ -1,0 +1,65 @@
+
+class BinaryHeap:
+    def __init__(self):
+        self.binarylist=[0]
+        self.cursize=0
+    def insert(self,k):
+        self.binarylist.append(k)
+        self.cursize +=1
+        self.percUp(self.cursize)
+        return self.binarylist
+    def percUp(self,i):
+        
+        while i//2 > 0 :
+            if self.binarylist[i]<self.binarylist[i//2]:
+                temp=self.binarylist[i//2]
+                self.binarylist[i//2]=self.binarylist[i]
+                self.binarylist[i]=temp
+            i=i//2
+                
+    def delmin(self):
+        
+        r=self.binarylist[1]
+        sel.binarylist[1]=self.binarylist[size]
+        self.percDown(1)
+        self.cursize -=1
+        
+    def percDown(self,i):
+        
+        while (i * 2) <= self.cursize:
+            
+            mc = self.findmin(i)
+            if self.binarylist[i] > self.binarylist[mc]:
+                
+                tmp = self.binarylist[i]
+                self.binarylist[i] = self.binarylist[mc]
+                self.binarylist[mc] = tmp
+            i = mc
+            
+            
+    def findmin(self,k):
+        if k * 2 + 1 > self.cursize:
+            return i * 2
+        else:
+            
+            if self.binarylist[k*2] < self.binarylist[k*2+1]:
+                return k * 2
+            else:
+                return k * 2 + 1
+            
+    def buildHeap(self,alist):
+        i=len(alist)//2
+        self.binarylist=[0] + alist[:]
+        self.cursize=len(alist)
+        while(i > 0):
+            self.percDown(i)
+            print(self.binarylist)
+            i = i - 1
+    def showHeap(self):
+        
+        return self.binarylist
+f=BinaryHeap()
+
+f.buildHeap([27,9,11,14,18])
+print(f.insert(1))
+

@@ -1,0 +1,14 @@
+step1:take 3 pointers
+
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        prev=None
+        cur=head
+        nexxt=None
+        while(cur!=None):
+            nexxt=cur.next
+            cur.next=prev
+            prev=cur
+            cur=nexxt
+        return prev

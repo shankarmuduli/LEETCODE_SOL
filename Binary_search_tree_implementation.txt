@@ -1,0 +1,129 @@
+
+class node:
+    def __init__(self,value=None):
+        self.value=value
+        self.left=None
+        self.right=None
+        self.parent=None
+class binary_search_tree:
+    def __init__(self):
+        self.root=None
+    def insert(self,value):
+        if self.root==None:
+            self.root=node(value)
+        else:
+            self._insert(value,self.root)
+    def _insert(self,value,cur_node):
+        if value<cur_node.value:
+            if cur_node.left==None:
+                cur_node.left=node(value)
+                cur_node.left.parent=cur_node
+            else:
+                self._insert(value,cur_node.left)
+                
+        elif value>cur_node.right:
+            if cur_node.right==None:
+                cur_node.right=node(value)
+                cur_node.right.parent=cur_node
+            else:
+                self._insert(value,cur_node.right)
+        else:
+            print("no duplicates allowed")
+    def print_tree(self):
+        if self.root!=None:
+            self._print_tree(self.root)
+        
+    def _print_tree(self,cur_node):
+        if cur_node!=None:
+            self._print_tree(cur_node.left)
+            print(cur_node.value)
+            self._print_tree(cur_node.right)
+    def height(self):
+        if self.root!=None:
+            return self._height(self.root,0)
+        else:
+            return 0
+    def _height(self,cur_node,height):
+        if cur_node==None:
+            return height
+        left_height=self._height(cur_node.left,height+1)
+        right_height=self._height(cur_node.right,height+1)
+        return max(left_height,right_height)
+    def find(self,value):
+        if self.root!=None:
+            return self._find(value,self.root)
+        else:
+            return 0
+    def _find(self,value,cur_node):
+        if value==cur_node.value:
+            return cur_node
+        elif value<cur_node.value and cur_node.left!=None:
+            return self._find(value,cur_node.left)
+        elif value>cur_node.value and cur_node.right!=None:
+            return self._find(value,cur_node.right)
+    def delete(self,value):
+        if self.root!=0:
+            self._delete(self.find(value))
+    def _delete(self,node):
+        if node==None:
+            print("no node found")
+            return None
+        def min_value_node(n):
+            current=n
+            while(current.left!=None):
+                current=current.left
+            return current
+        def num_child(n):
+            num_children=0
+            if n.left!=None: num_children+=1
+            if n.right!=None:num_children+=1
+            return num_children
+        
+        node_parent=node.parent
+        number_children=num_child(node)
+        
+        if number_children==0:
+            if node_parent!=None:
+                if node_parent.left==node:
+                    node_parent.left=None
+                elif node_parent.right==node:
+                    node_parent.right=None
+            else:
+                self.root=None
+        
+        if number_children==1:
+            
+            if node.left!=None:
+                child=node.left
+            else:
+                child=node.right
+            if node_parent!=None:
+                if node_parent.left==node:
+                    node_parent.left=child
+                elif node_parent.right==node:
+                    node_parent.right=child
+                    
+            else:
+                self.root=child
+            child.parent=node_parent
+        if number_children==2:
+            succesor=min_value_node(node)
+            node.value=succesor.value
+            self._delete(succesor)
+            
+        
+        
+            
+        
+tree=binary_search_tree()
+tree.insert(7)
+tree.insert(8)
+tree.insert(2)
+tree.insert(0)
+tree.print_tree()
+print(tree.height())
+print(tree.find(2))
+tree.delete(0)
+tree.print_tree()
+
+    
